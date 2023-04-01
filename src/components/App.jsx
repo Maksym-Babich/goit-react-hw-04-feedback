@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from 'react';
+import React, { useState } from 'react';
 import { Section } from 'components/Section/Section';
 import { FeedbackOptions } from 'components/FeedbackOptions/FeedbackOptions';
 import { Statistics } from 'components/Statistics/Statistics';
@@ -16,10 +16,12 @@ export const App = function () {
   };
 
   const countPositiveFeedbackPercentage = () => {
-    return countTotalFeedback() ? `${((good / countTotalFeedback()) * 100).toFixed(0)}%` : `0%`;
+    return countTotalFeedback()
+      ? `${((good / countTotalFeedback()) * 100).toFixed(0)}%`
+      : `0%`;
   };
 
-  const leaveFeedback = (event) => {
+  const leaveFeedback = event => {
     switch (event.target.textContent) {
       case 'good':
         setGood(good + 1);
@@ -32,13 +34,18 @@ export const App = function () {
       case 'neutral':
         setNeutral(neutral + 1);
         break;
+      default:
+        break;
     }
   };
 
   return (
     <>
       <Section title="Please leave feedback">
-        <FeedbackOptions options={defaultOptions} onLeaveFeedback={leaveFeedback} />
+        <FeedbackOptions
+          options={defaultOptions}
+          onLeaveFeedback={leaveFeedback}
+        />
       </Section>
       <Section title="Statistics">
         {countTotalFeedback() ? (
